@@ -16,8 +16,6 @@ import time
 import asyncio
 import os
 
-# 【修改處 1】 新增這一行匯入 Mangum
-from mangum import Mangum 
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -35,9 +33,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# 【修改處 2】 加入這一行，這就是 Vercel 尋找的入口點
-handler = Mangum(app)
 
 GROK_BASE_URL = "https://grok.ylsagi.com"
 
@@ -667,7 +662,7 @@ async def openai_health():
     """OpenAI 格式的健康檢查"""
     return {"status": "ok"}
 
-# 【修改處 3】 這裡保持原樣即可，Vercel 會忽略這段，但你在自己電腦跑時會用到
+# 這裡保持原樣即可，Render 會忽略這段，但你在自己電腦跑時會用到
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5000)
