@@ -31,12 +31,12 @@
 Vercel 需要知道要安裝哪些套件。請在你的專案根目錄新增一個檔案叫 `requirements.txt`，內容如下：
 
 ```txt
-fastapi
-uvicorn
-requests
-tiktoken
-mangum
-pydantic
+fastapi==0.115.0
+uvicorn==0.30.6
+mangum==0.17.0
+requests==2.32.3
+pydantic==2.9.2
+tiktoken==0.7.0
 ```
 *注意：`mangum` 是必須新增的，它是讓 Vercel 讀懂 FastAPI 的關鍵翻譯官。*
 
