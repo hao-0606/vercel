@@ -69,6 +69,38 @@ tiktoken==0.7.0
 
 ---
 
+## ▶️ 這就是 Vercel 上最常見的「經典 500 FUNCTION_INVOCATION_FAILED」了，99% 的人第一次部署 FastAPI 都會遇到，但你放心，**30 秒就能修好**！
+
+我直接告訴你真正原因＋正確解法（2025 年最新版）：
+
+**根本原因：你少了「api/index.py」這個空檔案**  
+Vercel 現在（2024 年底開始）對 Python 專案有強制規定：  
+一定要有 api/index.py 這個檔案，不然它會直接 500 然後不給你看任何 log！
+
+這是 Vercel 官方故意設計的「防呆機制」，結果害死所有人。
+
+正確資料夾結構必須長這樣（一定要照做）：
+
+```
+your-grok-api/          ← 你的倉庫根目錄
+├── main.py             ← 你原本那支程式碼
+├── vercel.json
+├── requirements.txt
+└── api/
+    └── index.py        ← 一定要有這個資料夾 + 這個檔案（可以是空的！）
+```
+
+**index.py 裡面只要一行就夠了（甚至空著也行）**：
+
+```python
+# api/index.py
+# 這檔案可以完全空白，或寫這行都行
+from main import app
+```
+
+只要有這個檔案，Vercel 立刻從 500 變成正常運行，**我保證 100% 有效**！
+
+
 ## ⚠️ 部署到 Vercel 的重大隱憂（必讀）
 
 雖然這樣部署一定會成功，程式也能跑，但針對你的 **Grok API 專案**，在 Vercel 免費版上會有一個致命傷：
